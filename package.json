@@ -1,0 +1,22 @@
+{
+  "name": "sitegrep",
+  "version": "1.0.0",
+  "description": "sitegrep",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sv.junic@gmail.com",
+  "license": "mit",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "colors": "^1.1.2",
+    "csv2jsonic": "^1.0.3",
+    "execsyncs": "^0.1.1",
+    "iconv-lite": "^0.4.10",
+    "jquery": "^2.1.4",
+    "lodash": "^3.9.3",
+    "request": "^2.58.0"
+  }
+}
