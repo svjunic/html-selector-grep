@@ -40,12 +40,22 @@ resourceArray.pop();
 
 /* 1ファイルづつ処理（キャッシュすると重くて辛い） -------------------- */
 while( resourceArray.length > 0 ) {
-// 回す
-var filepath = resourceArray.pop();
+  // 回す
+  let filepath = resourceArray.pop();
 
-var htmlString = getHtmlSource( filepath );
-var result = findSelector( htmlString, selectors );
+  let htmlString = getHtmlSource( filepath );
+  let result = findSelector( htmlString, selectors );
 
-console.log( result, selectors );
+  //console.log( result, selectors );
 
+  let pc  = result.$( "table.tbl.branch-1.center td" ).eq(0).html();
+  let sp  = result.$( "table.tbl.branch-1.center td" ).eq(1).html();
+  let md  = result.$( "table.tbl.branch-1.center td" ).eq(2).html();
+  let one = result.$( "table.tbl.branch-1.center td" ).eq(3).html();
+
+  let tpc  = result.$( "table.tbl.branch-1.center td" ).eq(0).html();
+  let tsp  = result.$( "table.tbl.branch-1.center td" ).eq(1).html();
+  let tmd  = result.$( "table.tbl.branch-1.center td" ).eq(2).html();
+  let tone = result.$( "table.tbl.branch-1.center td" ).eq(3).html();
+  console.log( filepath, pc, sp, md, one );
 }
