@@ -23,8 +23,8 @@ var getHtmlSource = function( filepath ) {
       htmlString = iconvlite.decode( htmlBuffer, result[1] );
     }
   } catch (e) {
-    console.log( filepath,e );
-    console.log( htmlString );
+    //console.log( filepath,e );
+    //console.log( htmlString );
   }
 
   return htmlString;

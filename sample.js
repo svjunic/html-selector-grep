@@ -49,7 +49,8 @@ rl.on('line', function( filepath ) {
   let htmlString = getHtmlSource( filepath );
   let result = findSelector( htmlString, selectors );
 
-  if( result.isMatch ) {
+  if( result.isMatch && result.result.length === 2 ) {
     console.log( filepath );
+    //console.log( result );
   }
 });

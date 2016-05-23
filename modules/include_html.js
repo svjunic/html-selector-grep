@@ -1,7 +1,5 @@
 'use strict';
 
-var debug = false;
-
 var includeHtml = {
   create: function( options ){
     var app = {
@@ -69,7 +67,7 @@ var includeHtml = {
 
         // 初期dom取得
 
-        if( debug ) console.log( 'Dom変換' );
+        //console.log( 'Dom変換' );
 
         var document = jsdom.jsdom( htmlString, {
           features : {
@@ -91,17 +89,17 @@ var includeHtml = {
           html.doctypeSystemId       = '';
         }
 
-        if( debug ) {
-          var link = document.querySelectorAll( 'link[rel="stylesheet"]' );
-          if( link.length > 0 ) {
-            console.log( link[0].getAttribute('href') );
-          } else {
-            console.log( 'link element not found' );
-          }
-          link = null;
-        }
+        //if( debug ) {
+        //  var link = document.querySelectorAll( 'link[rel="stylesheet"]' );
+        //  if( link.length > 0 ) {
+        //    console.log( link[0].getAttribute('href') );
+        //  } else {
+        //    console.log( 'link element not found' );
+        //  }
+        //  link = null;
+        //}
 
-        if( debug ) console.log( '保存' );
+        //if( debug ) console.log( '保存' );
 
         document.defaultView.close();
         document = null

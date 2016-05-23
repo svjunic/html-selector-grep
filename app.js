@@ -30,13 +30,11 @@ var check_dir = process.argv[2];
 var selectors = process.argv[3].split(',');
 
 /* ファイル検索 -------------------- */
-// NOTE: （シェル使いからしたら邪魔かもしれない）
 // findで結果を取得
 var resourceArray = execsyncs("find " + check_dir + "* -type f -name '*.html'").toString().split('\n');
 
 // 最後から空の行なので削除
 resourceArray.pop();
-
 
 /* 1ファイルづつ処理（キャッシュすると重くて辛い） -------------------- */
 while( resourceArray.length > 0 ) {
