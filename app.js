@@ -15,7 +15,10 @@
  * @param {String} process.argv[3] セレクタ "selector,selector"のカンマ区切りで記述
  */
 
+require('./modules/config.js');
+
 var colors    = require('colors');
+
 
 var _         = require('lodash');
 var execsyncs = require('execsyncs');
@@ -36,19 +39,13 @@ resourceArray.pop();
 
 
 /* 1ファイルづつ処理（キャッシュすると重くて辛い） -------------------- */
-
+while( resourceArray.length > 0 ) {
 // 回す
 var filepath = resourceArray.pop();
 
 var htmlString = getHtmlSource( filepath );
 var result = findSelector( htmlString, selectors );
-console.log( result, selectors );
-
-// 試し
-filepath = resourceArray.pop();
-
-htmlString = getHtmlSource( filepath );
-result = findSelector( htmlString, selectors );
 
 console.log( result, selectors );
 
+}

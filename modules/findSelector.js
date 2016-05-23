@@ -22,7 +22,12 @@ var findSelector = function ( htmlString, selectorArray ) {
   var matchSelector     = [];
   var matchCheerioArray = [];
 
-  var $ = cheerio.load( htmlString );
+  var $ = cheerio.load( htmlString, {
+    withDomLvl1: true,
+    normalizeWhitespace: false,
+    xmlMode: false,
+    decodeEntities: false // 読み込み時に既にデコード済みなので不要
+  });
 
   var isMatch      = false;
   var isError      = false;
@@ -51,7 +56,8 @@ var findSelector = function ( htmlString, selectorArray ) {
     isMatch       : isMatch,
     isError       : isError,
     matchSelector : matchSelector,
-    result        : matchCheerioArray
+    result        : matchCheerioArray,
+    $             : $
   };
 };
 
