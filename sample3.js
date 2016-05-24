@@ -43,7 +43,6 @@ var readline  = require('readline');
 var rs = fs.createReadStream( TARGET_LIST );
 var rl = readline.createInterface(rs, {});
 
-
 /* 対象ファイル一覧から１行づつ処理 -------------------- */
 rl.on('line', function( filepath ) {
   let htmlString = getHtmlSource( filepath );
@@ -55,8 +54,10 @@ rl.on('line', function( filepath ) {
 
     // textareaも何故かdomでカウントされてしまうので、排除する
     result.$('textarea').empty();
-
+    
     if( result.$('.tbl th:last-of-type').length !== 0 ){
+      let url = filepath.replace( "/mnt2/www/guideline/pack/192.168.211.10:51000", "http://sv.junic.jp");
+      console.log( '<h2 class="hdg-l2"><a href="' + url + '" target="_blank">' + url + '</a></h2>' );
       console.log( result.$.html('.tbl'));
     }
   }
