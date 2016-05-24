@@ -3,10 +3,14 @@
 var _ = require('lodash');
 
 /*
+ * 引数のhtmlテキストデータから引数のセレクタを持つか持たないか判断する
+ *
  * @filename findSelector.js
+ * @param {String} htmlString htmlのテキストデータ
+ * @param {String,Array} selectors CSSSelectorの文字列、又はCSSSelectorの配列
  */
 
-var findSelector = function ( htmlString, selectorArray ) {
+var findSelector = function ( htmlString, selectors ) {
   //return new Promise( function ( resolve, reject ) {
   //  resolve( {
   //    isMatch       : isMatch,
@@ -31,6 +35,17 @@ var findSelector = function ( htmlString, selectorArray ) {
 
   var isMatch      = false;
   var isError      = false;
+
+
+  // selectorsが文字列の場合は配列に変換
+  var selectorArray;
+  if( typeof selectors === "string" ) {
+    selectorArray = [];
+    selectorArray.push( selectors );
+  } else {
+    selectorArray = selectors;
+  }
+
 
   try {
     // dom検索

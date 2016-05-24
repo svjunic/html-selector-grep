@@ -1,7 +1,10 @@
 'use strict';
 
 /*
- * @filename findSelector.js
+ * ファイルパスをもらい、テキストを返すモジュール
+ * ローカルファイル参照用
+ * @filename getHtmlSource.js
+ * @param {String} file path.
  */
 
 var iconvlite = require('iconv-lite');
