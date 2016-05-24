@@ -50,9 +50,14 @@ rl.on('line', function( filepath ) {
   let result = findSelector( htmlString, selectors );
 
   if( result.isMatch ) {
+    // 特定のdivはカウントしたくない
+    result.$('.module-write').empty();
+
+    // textareaも何故かdomでカウントされてしまうので、排除する
     result.$('textarea').empty();
-    if(  result.$('.tbl thead th:last-of-type').length  !== 0 ){
-      console.log( filepath );
+
+    if( result.$('.tbl th:last-of-type').length !== 0 ){
+      console.log( result.$.html('.tbl'));
     }
   }
 });
