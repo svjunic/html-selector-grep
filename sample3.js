@@ -43,6 +43,7 @@ var readline  = require('readline');
 var rs = fs.createReadStream( TARGET_LIST );
 var rl = readline.createInterface(rs, {});
 
+
 /* 対象ファイル一覧から１行づつ処理 -------------------- */
 rl.on('line', function( filepath ) {
   let htmlString = getHtmlSource( filepath );
