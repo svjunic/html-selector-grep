@@ -23,8 +23,8 @@ var findSelector = function ( htmlString, selectors ) {
   // 毎回読み込まないとキャッシュが残りメモリリーク
   var cheerio = require('cheerio');
 
-  var matchSelector     = [];
-  var matchCheerioArray = [];
+  var matchSelector = [];
+  var matchCheerio  = [];
 
   var $ = cheerio.load( htmlString, {
     withDomLvl1: true,
@@ -33,7 +33,7 @@ var findSelector = function ( htmlString, selectors ) {
     decodeEntities: false // 読み込み時に既にデコード済みなので不要
   });
 
-  var isMatch      = false;
+  var isMatch      = true;
   var isError      = false;
 
 
@@ -54,16 +54,19 @@ var findSelector = function ( htmlString, selectors ) {
       var $link = $( selector );
 
       if( $link.length > 0 ) {
-        isMatch = true;
         matchSelector.push( selector );
-        matchCheerioArray.push( $link );
+        matchCheerio.push( $link );
       } else {
         isMatch = isMatch || false;
       }
     });
+    if( selectorArray.length > matchSelector.length ) {
+      isMatch = false;
+    }
   } catch (e) {
     // エラー時
     isMatch = false;
+    isError = true;
     console.log(( 'cheerio selector error : ' + findSelector ).bgRed );
   }
 
@@ -71,7 +74,7 @@ var findSelector = function ( htmlString, selectors ) {
     isMatch       : isMatch,
     isError       : isError,
     matchSelector : matchSelector,
-    result        : matchCheerioArray,
+    result        : matchCheerio,
     $             : $
   };
 };
