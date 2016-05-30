@@ -55,8 +55,10 @@ rl.on('line', function( filepath ) {
 
     // textareaも何故かdomでカウントされてしまうので、排除する
     result.$('textarea').empty();
-
+    
     if( result.$('.tbl th:last-of-type').length !== 0 ){
+      let url = filepath.replace( "/mnt2/www/guideline/pack/192.168.211.10:51000", "http://sv.junic.jp");
+      console.log( '<h2 class="hdg-l2"><a href="' + url + '" target="_blank">' + url + '</a></h2>' );
       console.log( result.$.html('.tbl'));
     }
   }
