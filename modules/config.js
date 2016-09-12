@@ -1,4 +1,6 @@
 module.exports = {
+  CHILD_PROCESS: 5,
+
   colorBlack   : '\u001b[30m',
   colorRed     : '\u001b[31m',
   colorGreen   : '\u001b[32m',

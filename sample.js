@@ -1,56 +1,57 @@
-'use strict';
+#!/usr/bin/env node
 
 /**
- * @fileOverview app.js
+ * @fileOverview main.js
  *
  * @author sv.junic
  */
 
-/**
- * ディレクトリ以下のhtmlファイルからセレクタでgrepする
- *
- * @param {String} process.argv[0]
- * @param {String} process.argv[1]
- * @param {String} process.argv[2] 対象ディレクトリ
- * @param {String} process.argv[3] セレクタ "selector,selector"のカンマ区切りで記述
- */
 
+// 細かい出し分け等を書く
 require('./modules/config.js');
+require('date-utils');
 
-var colors    = require('colors');
-
-var _         = require('lodash');
+var fs = require('fs');
+var readline  = require('readline');
 var execsyncs = require('execsyncs');
 
-var getHtmlSource = require( './modules/getHtmlSource.js' );
-var findSelector  = require( './modules/findSelector.js' );
+var proxyChildProcess = require('./modules/proxyChildProcess.js');
 
-var check_dir = process.argv[2];
-var selectors = process.argv[3].split(',');
+var dt        = new Date();
+var formatted = dt.toFormat("YYYYMMDDHH24MISS");
 
-const TARGET_LIST = "./data/target.txt";
+var findlist = './data/' + formatted + '.txt';
+var htmldir  = '/mnt2/www/preview/pack/sp/';
 
+// ２つ書くと両方あるもの、１つにまとめてて書くどちらかがあるもの
+var findSelecter = [
+  '*[class*=carousel], *[class*=slide]'
+];
 
-/* ファイルリスト作成 -------------------- */
-// 検索後に対象になったhtmlのリストがあると便利だったので書き出しておく
-execsyncs( "find " + check_dir + "* -type f -name '*.html' > " + TARGET_LIST );
+// var query2 = function() {
+//   //[
+//   //    '*[class*=carousel], *[class*=slide]',
+//   //    '*[class*=carousel], *[class*=slide]',
+//   //];
+// }
 
+// ----------------------------------------------------------------------------------------------------
+// main
+execsyncs( "find " + htmldir + "* -type f -name '*.html' | sort > " + findlist );
 
-/* ファイルリストのストリーム作成 -------------------- */
-var fs        = require('fs');
-var readline  = require('readline');
-
-var rs = fs.createReadStream( TARGET_LIST );
+var rs = fs.createReadStream( findlist );
 var rl = readline.createInterface(rs, {});
 
+var fileid = 0;
+var filelist = [];
 
-/* 対象ファイル一覧から１行づつ処理 -------------------- */
 rl.on('line', function( filepath ) {
-  let htmlString = getHtmlSource( filepath );
-  let result = findSelector( htmlString, selectors );
-
-  if( result.isMatch && result.result.length === 2 ) {
-    console.log( filepath );
-    //console.log( result );
-  }
+  fileid++;
+  filelist.push( { fileid:fileid, filepath:filepath } );
 });
+
+proxyChildProcess( findSelecter, filelist, {
+  filter   : function(){},
+  callback : function(){},
+});
+

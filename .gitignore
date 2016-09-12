@@ -15,3 +15,6 @@ node_modules
 /data/target.txt
 
 _*
+html
+modules/_htmlSelecterGrep.js
+data/[0-9]*.txt

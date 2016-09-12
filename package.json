@@ -18,5 +18,8 @@
     "jquery": "^2.1.4",
     "lodash": "^3.9.3",
     "request": "^2.58.0"
+  },
+  "devDependencies": {
+    "date-utils": "^1.2.21"
   }
 }
