@@ -15,13 +15,7 @@
  * @param {String} process.argv[3] セレクタ "selector,selector"のカンマ区切りで記述
  */
 
-require('./modules/config.js');
-
-var colors    = require('colors');
-
-
-var _         = require('lodash');
-var execsyncs = require('execsyncs');
+const execSync = require('child_process').execSync;
 
 var getHtmlSource = require( './modules/getHtmlSource.js' );
 var findSelector  = require( './modules/findSelector.js' );
@@ -31,7 +25,7 @@ var selectors = process.argv[3].split(',');
 
 /* ファイル検索 -------------------- */
 // findで結果を取得
-var resourceArray = execsyncs("find " + check_dir + "* -type f -name '*.html'").toString().split('\n');
+var resourceArray = execSync("find " + check_dir + "* -type f -name '*.html'").toString().split('\n');
 
 // 最後から空の行なので削除
 resourceArray.pop();

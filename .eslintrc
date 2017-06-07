@@ -1,0 +1,20 @@
+{
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "no-console"  : 0,
+    "no-alert"    : 0,
+    "no-debugger" : 1
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true,
+    "node": true
+  },
+  "ecmaFeatures": {
+    "templateStrings": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+  }
+}
