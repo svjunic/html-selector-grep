@@ -10,7 +10,6 @@
 var iconvlite = require('iconv-lite');
 var fs        = require('fs');
 
-// ファイル扱うので非同期
 var getHtmlSource = function( filepath ) {
   // ファイルの読み込み
   var htmlString = fs.readFileSync( filepath, 'utf8' );
