@@ -15,12 +15,7 @@
  * @param {String} process.argv[3] セレクタ "selector,selector"のカンマ区切りで記述
  */
 
-require('./modules/config.js');
-
-var colors    = require('colors');
-
-var _         = require('lodash');
-var execsyncs = require('execsyncs');
+const execSync = require('child_process').execSync;
 
 var getHtmlSource = require( './modules/getHtmlSource.js' );
 var findSelector  = require( './modules/findSelector.js' );
@@ -33,7 +28,7 @@ const TARGET_LIST = "./data/target.txt";
 
 /* ファイルリスト作成 -------------------- */
 // 検索後に対象になったhtmlのリストがあると便利だったので書き出しておく
-execsyncs( "find " + check_dir + "* -type f -name '*.html' > " + TARGET_LIST );
+execSync( "find " + check_dir + "* -type f -name '*.html' | sort > " + TARGET_LIST );
 
 
 /* ファイルリストのストリーム作成 -------------------- */
